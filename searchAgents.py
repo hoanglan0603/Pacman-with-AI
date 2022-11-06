@@ -302,6 +302,8 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
+        visistedCorners = state[1]
+        return len(visistedCorners) == 4
         util.raiseNotDefined()
 
     def getSuccessors(self, state):
@@ -454,6 +456,13 @@ def foodHeuristic(state, problem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
+    listDistance = []
+    listFood = foodGrid.asList()
+    if len(listFood) != 0:
+        for food in listFood:
+            listDistance.append(util.manhattanDistance(position,food))
+        maxDistance = max(listDistance)
+        return maxDistance
     return 0
 
 class ClosestDotSearchAgent(SearchAgent):
